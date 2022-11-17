@@ -1,6 +1,22 @@
 fun main() {
     println("Welcome to ByteBank");
-    variables();
+    val conta = Conta();
+    conta.titular = "Eric";
+    conta.numero = 1000;
+    conta.saldo = 1000.0;
+    println("Conta 1: ${conta.titular}");
+
+    val contaDaRebecca = Conta();
+    contaDaRebecca.titular = "Rebecca";
+    contaDaRebecca.numero = 3000;
+    contaDaRebecca.saldo = 1000000.0;
+    println("Conta 2 ${contaDaRebecca.titular}")
+}
+
+class Conta {
+    var titular: String = "";
+    var numero: Int = 0;
+    var saldo: Double = 0.0;
 }
 
 fun variables() {
