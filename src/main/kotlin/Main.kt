@@ -6,7 +6,7 @@ fun main() {
 class Conta {
     var titular: String = "";
     var numero: Int = 0;
-    var saldo: Double = 0.0;
+    private var saldo: Double = 0.0;
 
     fun deposita(valor: Double) {
         this.saldo += valor;
@@ -24,19 +24,61 @@ class Conta {
         }
         return false;
     }
+
+    fun getSaldo(): Double {
+        return this.saldo;
+    }
+
+    fun setSaldo(valor: Double) {
+        if(valor > 0) {
+            this.saldo = saldo;
+        }
+    }
+}
+
+fun testaFuncoes() {
+    val contaJoao = Conta();
+    contaJoao.titular = "João";
+    var contaMaria = Conta();
+    contaMaria.titular = "Maria";
+    contaMaria.numero = 1002;
+
+    println("titular conta joão: ${contaJoao.titular}")
+    println("titular conta maria: ${contaMaria.titular}")
+
+    println("Depositando conta João")
+    contaJoao.setSaldo(1000.0);
+    println("Saldo: ${contaJoao.getSaldo()}");
+
+    println("Depositando conta João - COM FUNÇÃO DEPOSITA")
+    contaJoao.deposita(2000.0);
+    println("Saldo: ${contaJoao.getSaldo()}");
+
+    println("Sacando conta João - COM FUNÇÃO SAQUE")
+    contaJoao.saca(1200.0);
+    println("Saldo: ${contaJoao.getSaldo()}");
+
+    println("Transferindo conta João para conta Maria - COM FUNÇÃO TRANSFERE")
+    if(contaJoao.transfere(contaMaria, 1600.0)) {
+        println("Transferência realizada.");
+    } else {
+        println("Transferência falhou.");
+    }
+    println("Saldo João: ${contaJoao.getSaldo()}");
+    println("Saldo Maria: ${contaMaria.getSaldo()}");
 }
 
 fun testaCopiasEReferencias() {
     val conta = Conta();
     conta.titular = "Eric";
     conta.numero = 1000;
-    conta.saldo = 1000.0;
+    conta.setSaldo(1000.0);
     println("Conta 1: ${conta.titular}");
 
     val contaDaRebecca = Conta();
     contaDaRebecca.titular = "Rebecca";
     contaDaRebecca.numero = 3000;
-    contaDaRebecca.saldo = 1000000.0;
+    contaDaRebecca.setSaldo(1000000.0);
     println("Conta 2 ${contaDaRebecca.titular}")
 
     val numeroX = 10;
@@ -54,27 +96,6 @@ fun testaCopiasEReferencias() {
 
     println("titular conta joão: ${contaJoao.titular}")
     println("titular conta maria: ${contaMaria.titular}")
-
-    println("Depositando conta João")
-    contaJoao.saldo += 1000.0;
-    println("Saldo: ${contaJoao.saldo}");
-
-    println("Depositando conta João - COM FUNÇÃO DEPOSITA")
-    contaJoao.deposita(2000.0);
-    println("Saldo: ${contaJoao.saldo}");
-
-    println("Sacando conta João - COM FUNÇÃO SAQUE")
-    contaJoao.saca(1200.0);
-    println("Saldo: ${contaJoao.saldo}");
-
-    println("Transferindo conta João para conta Maria - COM FUNÇÃO TRANSFERE")
-    if(contaJoao.transfere(contaMaria, 1600.0)) {
-        println("Transferência realizada.");
-    } else {
-        println("Transferência falhou.");
-    }
-    println("Saldo João: ${contaJoao.saldo}");
-    println("Saldo Maria: ${contaMaria.saldo}");
 }
 
 fun variables() {
