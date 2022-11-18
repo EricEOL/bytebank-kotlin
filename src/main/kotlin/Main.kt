@@ -1,5 +1,19 @@
 fun main() {
     println("Welcome to ByteBank");
+    testaCopiasEReferencias();
+}
+
+class Conta {
+    var titular: String = "";
+    var numero: Int = 0;
+    var saldo: Double = 0.0;
+}
+
+fun deposita(conta: Conta, valor: Double) {
+    conta.saldo += valor;
+}
+
+fun testaCopiasEReferencias() {
     val conta = Conta();
     conta.titular = "Eric";
     conta.numero = 1000;
@@ -26,12 +40,14 @@ fun main() {
 
     println("titular conta joão: ${contaJoao.titular}")
     println("titular conta maria: ${contaMaria.titular}")
-}
 
-class Conta {
-    var titular: String = "";
-    var numero: Int = 0;
-    var saldo: Double = 0.0;
+    println("Depositando conta João")
+    contaJoao.saldo += 1000.0;
+    println("Saldo: ${contaJoao.saldo}");
+
+    println("Depositando conta João - COM FUNÇÃO DEPOSITA")
+    deposita(contaJoao, 2000.0);
+    println("Saldo: ${contaJoao.saldo}");
 }
 
 fun variables() {
