@@ -7,10 +7,14 @@ class Conta {
     var titular: String = "";
     var numero: Int = 0;
     var saldo: Double = 0.0;
-}
 
-fun deposita(conta: Conta, valor: Double) {
-    conta.saldo += valor;
+    fun deposita(valor: Double) {
+        this.saldo += valor;
+    }
+
+    fun saca(valor: Double) {
+        if(this.saldo >= valor) this.saldo -= valor;
+    }
 }
 
 fun testaCopiasEReferencias() {
@@ -46,7 +50,11 @@ fun testaCopiasEReferencias() {
     println("Saldo: ${contaJoao.saldo}");
 
     println("Depositando conta João - COM FUNÇÃO DEPOSITA")
-    deposita(contaJoao, 2000.0);
+    contaJoao.deposita(2000.0);
+    println("Saldo: ${contaJoao.saldo}");
+
+    println("Sacando conta João - COM FUNÇÃO SAQUE")
+    contaJoao.saca(1200.0);
     println("Saldo: ${contaJoao.saldo}");
 }
 
