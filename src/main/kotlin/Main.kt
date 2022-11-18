@@ -15,6 +15,15 @@ class Conta {
     fun saca(valor: Double) {
         if(this.saldo >= valor) this.saldo -= valor;
     }
+
+    fun transfere(contaDestino: Conta, valor: Double): Boolean {
+        if(this.saldo >= valor) {
+            this.saldo -= valor;
+            contaDestino.deposita(valor);
+            return true;
+        }
+        return false;
+    }
 }
 
 fun testaCopiasEReferencias() {
@@ -39,8 +48,9 @@ fun testaCopiasEReferencias() {
 
     val contaJoao = Conta();
     contaJoao.titular = "João";
-    var contaMaria = contaJoao;
+    var contaMaria = Conta();
     contaMaria.titular = "Maria";
+    contaMaria.numero = 1002;
 
     println("titular conta joão: ${contaJoao.titular}")
     println("titular conta maria: ${contaMaria.titular}")
@@ -56,6 +66,15 @@ fun testaCopiasEReferencias() {
     println("Sacando conta João - COM FUNÇÃO SAQUE")
     contaJoao.saca(1200.0);
     println("Saldo: ${contaJoao.saldo}");
+
+    println("Transferindo conta João para conta Maria - COM FUNÇÃO TRANSFERE")
+    if(contaJoao.transfere(contaMaria, 1600.0)) {
+        println("Transferência realizada.");
+    } else {
+        println("Transferência falhou.");
+    }
+    println("Saldo João: ${contaJoao.saldo}");
+    println("Saldo Maria: ${contaMaria.saldo}");
 }
 
 fun variables() {
