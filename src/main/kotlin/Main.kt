@@ -3,25 +3,32 @@ fun main() {
     testaCopiasEReferencias();
 }
 
-class Conta {
-    var titular: String = "";
-    var numero: Int = 0;
+class Conta(
+    var titular: String,
+    var numero: Int
+) {
     var saldo: Double = 0.0
         private set
 
+    /*
+    constructor(titular: String, numero: Int) {
+        this.titular = titular
+        this.numero = numero
+    }
+    */
 
     fun deposita(valor: Double) {
-        if(valor > 0) {
+        if (valor > 0) {
             this.saldo += valor;
         }
     }
 
     fun saca(valor: Double) {
-        if(this.saldo >= valor) this.saldo -= valor;
+        if (this.saldo >= valor) this.saldo -= valor;
     }
 
     fun transfere(contaDestino: Conta, valor: Double): Boolean {
-        if(this.saldo >= valor) {
+        if (this.saldo >= valor) {
             this.saldo -= valor;
             contaDestino.deposita(valor);
             return true;
@@ -42,11 +49,8 @@ class Conta {
 }
 
 fun testaFuncoes() {
-    val contaJoao = Conta();
-    contaJoao.titular = "João";
-    var contaMaria = Conta();
-    contaMaria.titular = "Maria";
-    contaMaria.numero = 1002;
+    val contaJoao = Conta("João", 10001);
+    var contaMaria = Conta("Maria", 1002);
 
     println("titular conta joão: ${contaJoao.titular}")
     println("titular conta maria: ${contaMaria.titular}")
@@ -64,7 +68,7 @@ fun testaFuncoes() {
     println("Saldo: ${contaJoao.saldo}");
 
     println("Transferindo conta João para conta Maria - COM FUNÇÃO TRANSFERE")
-    if(contaJoao.transfere(contaMaria, 1600.0)) {
+    if (contaJoao.transfere(contaMaria, 1600.0)) {
         println("Transferência realizada.");
     } else {
         println("Transferência falhou.");
@@ -74,15 +78,11 @@ fun testaFuncoes() {
 }
 
 fun testaCopiasEReferencias() {
-    val conta = Conta();
-    conta.titular = "Eric";
-    conta.numero = 1000;
+    val conta = Conta("Eric", 1000);
     conta.deposita(1000.0);
     println("Conta 1: ${conta.titular}");
 
-    val contaDaRebecca = Conta();
-    contaDaRebecca.titular = "Rebecca";
-    contaDaRebecca.numero = 3000;
+    val contaDaRebecca = Conta("Rebecca", 3000);
     contaDaRebecca.deposita(1000000.0);
     println("Conta 2 ${contaDaRebecca.titular}")
 
@@ -93,11 +93,8 @@ fun testaCopiasEReferencias() {
     println("numeroX $numeroX")
     println("numeroY $numeroY")
 
-    val contaJoao = Conta();
-    contaJoao.titular = "João";
-    var contaMaria = Conta();
-    contaMaria.titular = "Maria";
-    contaMaria.numero = 1002;
+    val contaJoao = Conta("João", 1001);
+    var contaMaria = Conta("Maria", 1002);
 
     println("titular conta joão: ${contaJoao.titular}")
     println("titular conta maria: ${contaMaria.titular}")
@@ -127,21 +124,21 @@ fun testaConditions(saldo: Double) {
 }
 
 fun testaLoops() {
-    for(i in 1..5) {
+    for (i in 1..5) {
         println("Using range: $i");
     }
 
-    for(i in 5 downTo 1) {
+    for (i in 5 downTo 1) {
         println("Using downTo: $i")
     }
 
-    for(i in 10 downTo 1 step 2) {
+    for (i in 10 downTo 1 step 2) {
         println("Using steps to jump in 2: $i")
     }
 
-    for(i in 10 downTo 1 step 2) {
+    for (i in 10 downTo 1 step 2) {
         println("Using break in the middle of for: $i");
-        if(i == 4) {
+        if (i == 4) {
             break;
         }
     }
