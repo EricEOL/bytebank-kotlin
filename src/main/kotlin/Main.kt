@@ -4,8 +4,8 @@ fun main() {
 }
 
 class Conta(
-    var titular: String,
-    var numero: Int
+    val titular: String,
+    val numero: Int
 ) {
     var saldo: Double = 0.0
         private set
@@ -49,8 +49,8 @@ class Conta(
 }
 
 fun testaFuncoes() {
-    val contaJoao = Conta("João", 10001);
-    var contaMaria = Conta("Maria", 1002);
+    val contaJoao = Conta(titular = "João", numero = 10001);
+    var contaMaria = Conta(numero = 10002, titular = "Maria");
 
     println("titular conta joão: ${contaJoao.titular}")
     println("titular conta maria: ${contaMaria.titular}")
@@ -68,7 +68,7 @@ fun testaFuncoes() {
     println("Saldo: ${contaJoao.saldo}");
 
     println("Transferindo conta João para conta Maria - COM FUNÇÃO TRANSFERE")
-    if (contaJoao.transfere(contaMaria, 1600.0)) {
+    if (contaJoao.transfere(contaDestino = contaMaria, valor = 1600.0)) {
         println("Transferência realizada.");
     } else {
         println("Transferência falhou.");
