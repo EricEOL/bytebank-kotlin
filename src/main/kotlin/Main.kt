@@ -6,10 +6,14 @@ fun main() {
 class Conta {
     var titular: String = "";
     var numero: Int = 0;
-    private var saldo: Double = 0.0;
+    var saldo: Double = 0.0
+        private set
+
 
     fun deposita(valor: Double) {
-        this.saldo += valor;
+        if(valor > 0) {
+            this.saldo += valor;
+        }
     }
 
     fun saca(valor: Double) {
@@ -25,6 +29,7 @@ class Conta {
         return false;
     }
 
+    /*
     fun getSaldo(): Double {
         return this.saldo;
     }
@@ -33,7 +38,7 @@ class Conta {
         if(valor > 0) {
             this.saldo = saldo;
         }
-    }
+    }*/
 }
 
 fun testaFuncoes() {
@@ -47,16 +52,16 @@ fun testaFuncoes() {
     println("titular conta maria: ${contaMaria.titular}")
 
     println("Depositando conta João")
-    contaJoao.setSaldo(1000.0);
-    println("Saldo: ${contaJoao.getSaldo()}");
+    contaJoao.deposita(1000.0);
+    println("Saldo: ${contaJoao.saldo}");
 
     println("Depositando conta João - COM FUNÇÃO DEPOSITA")
     contaJoao.deposita(2000.0);
-    println("Saldo: ${contaJoao.getSaldo()}");
+    println("Saldo: ${contaJoao.saldo}");
 
     println("Sacando conta João - COM FUNÇÃO SAQUE")
     contaJoao.saca(1200.0);
-    println("Saldo: ${contaJoao.getSaldo()}");
+    println("Saldo: ${contaJoao.saldo}");
 
     println("Transferindo conta João para conta Maria - COM FUNÇÃO TRANSFERE")
     if(contaJoao.transfere(contaMaria, 1600.0)) {
@@ -64,21 +69,21 @@ fun testaFuncoes() {
     } else {
         println("Transferência falhou.");
     }
-    println("Saldo João: ${contaJoao.getSaldo()}");
-    println("Saldo Maria: ${contaMaria.getSaldo()}");
+    println("Saldo João: ${contaJoao.saldo}");
+    println("Saldo Maria: ${contaMaria.saldo}");
 }
 
 fun testaCopiasEReferencias() {
     val conta = Conta();
     conta.titular = "Eric";
     conta.numero = 1000;
-    conta.setSaldo(1000.0);
+    conta.deposita(1000.0);
     println("Conta 1: ${conta.titular}");
 
     val contaDaRebecca = Conta();
     contaDaRebecca.titular = "Rebecca";
     contaDaRebecca.numero = 3000;
-    contaDaRebecca.setSaldo(1000000.0);
+    contaDaRebecca.deposita(1000000.0);
     println("Conta 2 ${contaDaRebecca.titular}")
 
     val numeroX = 10;
